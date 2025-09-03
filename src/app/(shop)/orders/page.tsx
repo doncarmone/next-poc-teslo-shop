@@ -1,7 +1,7 @@
 export default function AdminPage() {
   return (
     <div>
-      <h1>Cart Page</h1>
+      <h1>Orders Page</h1>
     </div>
   );
 }
