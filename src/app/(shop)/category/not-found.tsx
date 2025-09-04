@@ -1,0 +1,34 @@
+import { titleFont } from '@/config/fonts';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function () {
+  return (
+    <div className='flex flex-col-reverse md:flex-row h-[800px] w-full justify-center items-center align-middle'>
+      <div className='text-center px-5 mx-5'>
+        <h2 className={`${titleFont.className} antialiased text-9xl`}>404</h2>
+        <p className='font-semibold text-xl'>
+          Sorry, we couldn't find the page you're looking for.
+        </p>
+        <p className='font-light'>
+          <span>Puedes regresar al </span>
+          <Link
+            className='font-normal hover:underline transition-all text-blue-500'
+            href='/'
+          >
+            Home
+          </Link>
+        </p>
+      </div>
+      <div className='px-5 mx-5'>
+        <Image
+          className='p-5 sm:p-0'
+          src='/imgs/starman_750x750.png'
+          alt='starman'
+          width={550}
+          height={550}
+        />
+      </div>
+    </div>
+  );
+}
