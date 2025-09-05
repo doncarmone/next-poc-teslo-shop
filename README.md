@@ -2,7 +2,9 @@
 
 # Correr en Dev
 
-1. Clonar el repo
-2. Crear copia local del archivo `.env.example`
-3. Instalar dependencias `npm i`
-4. Correr proyecto `npm run dev`
+-. Clonar el repo
+-. Crear copia local del archivo `.env.example`
+-. Instalar dependencias `npm i`
+-. Correr las migraciones de Prisma `npx prisma migrate dev`
+-. Correr el seed `npm run seed`
+-. Correr proyecto `npm run dev`
