@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { Title } from '@/components';
 import { initialData } from '@/seed/seed';
-import { QuantitySelector } from '@/components';
 import clsx from 'clsx';
 import { IoCardOutline } from 'react-icons/io5';
 
