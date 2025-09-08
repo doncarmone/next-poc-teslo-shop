@@ -8,3 +8,4 @@ export * from './product/quatity/QuantitySelector';
 export * from './product/slideshow/SlideShow';
 export * from './product/slideshow/MobileSlideShow';
 export * from './ui/footer/Footer';
+export * from './ui/pagination/Pagination';

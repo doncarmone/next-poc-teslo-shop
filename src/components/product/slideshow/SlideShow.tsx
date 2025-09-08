@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const SlideShow = ({ images, title, className }: Props) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject | null>(null);
 
   return (
     <div className={className}>
