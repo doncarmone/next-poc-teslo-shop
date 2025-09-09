@@ -1,15 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { Title } from '../../../components/ui/title/Title';
-import { initialData } from '@/seed/seed';
-import { QuantitySelector } from '@/components';
+import { Title } from '@/components';
+import { ProductsInCart } from './ui/ProductsInCart';
+import { OrderSummary } from './ui/OrderSumary';
 
-const productsIncart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
-export default function AdminPage() {
+export default function CartPage() {
   // redirect('/empty');
 
   return (
@@ -26,47 +20,14 @@ export default function AdminPage() {
             </Link>
 
             {/* items */}
-
-            {productsIncart.map((product) => (
-              <div key={product.slug} className='flex mb-5'>
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  alt={product.title}
-                  width={100}
-                  height={100}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                  }}
-                  className='mr-5 rounded-lg'
-                />
-                <div>
-                  <p>{product.title}</p>
-                  <p>${product.price}</p>
-                  <QuantitySelector quantity={3} />
-                  <button className='underline mt-3'>Remover</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
 
-          {/* Example cart item */}
+          {/* Example cart item*/}
           <div className='bg-white rounded-xl shadow-xl p-7 h-fit'>
             <h2 className='text-2xl font-bold mb-2'>Resumen de orden</h2>
-            <div className='grid grid-cols-2'>
-              <span>No. Articulos:</span>
-              <span className='text-right'>
-                {productsIncart.length} Articulos
-              </span>
-              <span>subtotal</span>
-              <span className='text-right'>$100</span>
-              <span>Impuestos (15%)</span>
-              <span className='text-right'>$15</span>
-              <span className='text-2xl mt-5'>Total Price:</span>
-              <span className='text-2xl mt-5 text-right'>
-                ${productsIncart.reduce((acc, item) => acc + item.price, 0)}
-              </span>
-            </div>
+
+            <OrderSummary />
 
             <div>
               <Link
