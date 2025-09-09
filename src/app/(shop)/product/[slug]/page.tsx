@@ -1,19 +1,43 @@
+export const revalidate = 604800; //caching de 7 dias
+
 import { titleFont } from '@/config/fonts';
-import { initialData } from '@/seed/seed';
 import { notFound } from 'next/navigation';
 import { SizeSelector } from '@/components';
 import { QuantitySelector } from '@/components';
 import { SlideShow } from '@/components';
 import { MobileSlideShow } from '@/components';
+import { getProductBySlug } from '@/actions';
+import { StockLabel } from '@/components';
+import { Metadata, ResolvingMetadata } from 'next';
 
 interface Props {
   params: { slug: string };
 }
 
-export default function AdminPage({ params }: Props) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = (await params).slug;
+
+  // fetch post information
+  const product = await getProductBySlug(slug);
+
+  return {
+    title: product?.title ?? 'Producto no encontrado',
+    description: product?.description ?? '',
+    openGraph: {
+      title: product?.title ?? 'Producto no encontrado',
+      description: product?.description ?? '',
+      images: [`/products/${product?.images[1]}`],
+    },
+  };
+}
+
+export default async function ProductPage({ params }: Props) {
   const { slug } = params;
 
-  const product = initialData.products.find((p) => p.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return notFound();
@@ -37,6 +61,8 @@ export default function AdminPage({ params }: Props) {
       </div>
       {/* Product Details */}
       <div className='col-spa-1 px-5'>
+        <StockLabel slug={product.slug} />
+
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
