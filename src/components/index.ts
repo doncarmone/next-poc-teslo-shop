@@ -10,3 +10,5 @@ export * from './product/slideshow/MobileSlideShow';
 export * from './product/stock-label/StockLabel';
 export * from './ui/footer/Footer';
 export * from './ui/pagination/Pagination';
+
+export * from './providers/Provider';

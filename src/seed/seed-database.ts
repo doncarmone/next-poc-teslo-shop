@@ -5,6 +5,8 @@ async function main() {
     console.log("Cleaning database...");
 
     // await Promise.all([
+    await prisma.user.deleteMany()
+
     await prisma.productImage.deleteMany()
     await prisma.product.deleteMany()
     await prisma.category.deleteMany()
@@ -14,13 +16,18 @@ async function main() {
 
     //Categories
 
-    const { categories, products } = initialData;
+    const { categories, products, users } = initialData;
 
 
     const categoriesData = categories.map((name) => ({ name }));
 
     await prisma.category.createMany({
         data: categoriesData
+    })
+
+    //Users
+    await prisma.user.createMany({
+        data: users
     })
 
     const dbCategories = await prisma.category.findMany();
