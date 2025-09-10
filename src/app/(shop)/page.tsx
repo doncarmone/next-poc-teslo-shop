@@ -1,18 +1,20 @@
 export const revalidate = 60;
 
-import { Title, Pagination } from '@/components';
-import { ProductGrid } from '../../components/products/product-grid/ProductGrid';
-import { getPaginatedProductsWithImages } from '@/actions';
 import { redirect } from 'next/navigation';
+
+import { Title, Pagination, ProductGrid } from '@/components';
+import { getPaginatedProductsWithImages } from '@/actions';
 
 interface Props {
   searchParams: { page?: string };
 }
 
 export default async function Home({ searchParams }: Props) {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  // const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  const { page } = await searchParams;
+
   const { products, totalPages } = await getPaginatedProductsWithImages({
-    page,
+    page: page ? parseInt(page) : 1,
   });
 
   if (products.length === 0) {
