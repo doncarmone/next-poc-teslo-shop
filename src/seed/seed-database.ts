@@ -6,7 +6,11 @@ import prisma from "../lib/prisma";
 async function main() {
     console.log("Cleaning database...");
 
-    // await Promise.all([
+
+    await prisma.orderAdress.deleteMany()
+    await prisma.orderItem.deleteMany()
+    await prisma.order.deleteMany()
+
     await prisma.userAddress.deleteMany()
     await prisma.country.deleteMany()
     await prisma.user.deleteMany()
@@ -14,7 +18,6 @@ async function main() {
     await prisma.productImage.deleteMany()
     await prisma.product.deleteMany()
     await prisma.category.deleteMany()
-    // ]);
 
     console.log("Starting database seeding...");
 
