@@ -11,18 +11,15 @@ export const authConfig: NextAuthConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            console.log('AUTHORIZED CALLBACK', { auth, nextUrl });
             return true;
         },
         jwt: async ({ token, user }) => {
-            console.log('JWT callback', { token, user });
             if (user) {
                 token.data = user;
             }
             return token;
         },
         session: async ({ session, token }) => {
-            console.log('SESSION callback', { session, token });
             session.user = token.data as any;
             return session;
         }
