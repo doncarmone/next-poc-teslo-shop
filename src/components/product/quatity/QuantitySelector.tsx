@@ -7,11 +7,7 @@ interface Props {
   onQuantityChanged: (quantity: number) => void;
 }
 
-export const QuantitySelector = ({
-  quantity,
-  stock,
-  onQuantityChanged,
-}: Props) => {
+export const QuantitySelector = ({ quantity, onQuantityChanged }: Props) => {
   const [count, setCount] = useState(quantity);
   const onValueChanged = (value: number) => {
     if (count + value < 1) return;

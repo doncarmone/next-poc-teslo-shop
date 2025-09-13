@@ -13,6 +13,12 @@ export interface Product {
     gender: Category;
 }
 
+export interface ProductImage {
+    id: number;
+    url: string;
+    productId: string;
+}
+
 export interface CartProduct {
     id: string;
     slug: string;

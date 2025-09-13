@@ -129,6 +129,7 @@ export const placeOrder = async (productsIds: ProductToOrder[], address: Address
             return { order, orderAddress, updatedProducts };
         });
         return { ok: true, order: prismaTx.order, prismaTx: prismaTx };
+        // eslint-disable-next-line
     } catch (error: any) {
         console.log(error);
         return { ok: false, message: error?.message };

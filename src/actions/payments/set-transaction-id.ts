@@ -30,7 +30,9 @@ export const setTransactionaId = async ({ orderId, transactionId }: Props) => {
             ok: true,
             message: 'Transaction id set',
         }
+        // eslint-disable-next-line
     } catch (error: any) {
+        console.log(error)
         // logger.error('Error to set transaction id in order', error)
 
         return {

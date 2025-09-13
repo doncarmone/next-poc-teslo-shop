@@ -32,6 +32,7 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
         return {
             ok: true,
         }
+        // eslint-disable-next-line
     } catch (error: any) {
         // logger.error('Error checking payment', error)
 
@@ -74,7 +75,9 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
         }).then((resp) => resp.json())
 
         return result.access_token
+        // eslint-disable-next-line
     } catch (error: any) {
+        console.log(error)
         // logger.error('Error getting bearer token', error)
         return null
     }
@@ -101,7 +104,9 @@ const verifyPayPalPayment = async (
         }).then((resp) => resp.json())
 
         return result
+        // eslint-disable-next-line
     } catch (error: any) {
+        console.log(error)
         // logger.error('Error verifying paypal payment', error)
 
         return null
