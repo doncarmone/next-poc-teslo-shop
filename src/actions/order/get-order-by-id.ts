@@ -1,63 +1,82 @@
 'use server';
 
-import prisma from "@/lib/prisma";
-import { auth } from "@/auth.config";
+import { auth } from '@/auth.config';
+import prisma from '@/lib/prisma';
 
-export const getOrderById = async (orderId: string) => {
+
+
+export const getOrderById = async (id: string) => {
+
     const session = await auth();
-    if (!session) {
+
+    if (!session?.user) {
         return {
             ok: false,
-            message: 'No autorizado',
-            order: null,
+            message: 'Debe de estar autenticado'
         }
     }
+
+
     try {
+
         const order = await prisma.order.findUnique({
-            where: {
-                id: orderId,
-            },
+            where: { id },
             include: {
                 OrderAdress: true,
-                OrderItem: true,
-            },
+                // OrderAddress: true,
+                OrderItem: {
+                    select: {
+                        price: true,
+                        quantity: true,
+                        size: true,
+
+                        product: {
+                            select: {
+                                title: true,
+                                slug: true,
+
+                                ProductImage: {
+                                    select: {
+                                        url: true
+                                    },
+                                    take: 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         });
-        if (!order) return null;
 
-        const { OrderAdress, OrderItem, ...rest } = order;
+        if (!order) throw `${id} no existe`;
 
-        const dbProducts = await prisma.product.findMany({
-            where: {
-                id: {
-                    in: OrderItem.map((item) => item.productId),
-                },
-            },
-            include: {
-                ProductImage: true,
-            },
-        });
-
-        const products = dbProducts.map(({ ProductImage, ...product }) => ({
-            ...product,
-            images: ProductImage.map((image) => image.url),
-        }));
-
-        const orderFromDB = {
-            ...rest,
-            orderAdress: OrderAdress!,
-            products: products!
+        if (session.user.role === 'user') {
+            if (session.user.id !== order.userId) {
+                throw `${id} no es de ese usuario`
+            }
         }
+
+
 
         return {
             ok: true,
-            order: orderFromDB,
-        };
+            order: order,
+        }
+
+
     } catch (error) {
-        console.error('Error fetching order by ID:', error);
+
+        console.log(error);
+
         return {
             ok: false,
-            message: 'Error fetching order',
-            order: null,
-        };
+            message: 'Orden no existe'
+        }
+
+
     }
+
+
+
+
 }
