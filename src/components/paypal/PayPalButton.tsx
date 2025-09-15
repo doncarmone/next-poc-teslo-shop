@@ -53,6 +53,7 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
       if (!ok) throw new Error('Error to set transaction id in order');
 
       return transactionId;
+      // eslint-disable-next-line
     } catch (error: any) {
       console.log(error);
       return error.message;

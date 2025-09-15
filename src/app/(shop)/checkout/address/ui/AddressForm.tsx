@@ -35,6 +35,7 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     reset,
   } = useForm<FormInputs>({
     defaultValues: {
+      // eslint-disable-next-line
       ...(userStoredAddress as any),
       rememberAddress: true,
     },
@@ -51,14 +52,14 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     if (address.firstName) {
       reset(address);
     }
-  }, [address.firstName]);
+  }, [address, reset]);
 
   const onSubmit = async (data: FormInputs) => {
     const { rememberAddress, ...restAddress } = data;
 
     setAddress(restAddress);
 
-    if (data.rememberAddress) {
+    if (rememberAddress) {
       //Guardar en base de datos
       await setUserAddress(restAddress, session!.user.id);
     } else {

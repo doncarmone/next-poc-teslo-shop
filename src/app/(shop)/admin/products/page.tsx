@@ -2,10 +2,7 @@ import { getPaginatedProductsWithImages } from '@/actions';
 import { ProductImage, Title } from '@/components';
 
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { IoCardOutline } from 'react-icons/io5';
 import { Pagination } from '../../../../components/ui/pagination/Pagination';
-import Image from 'next/image';
 import { currencyFormat } from '../../../../utils/currencyFormat';
 
 interface Props {

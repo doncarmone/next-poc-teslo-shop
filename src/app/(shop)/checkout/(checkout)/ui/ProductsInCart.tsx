@@ -7,11 +7,6 @@ import { useEffect, useState } from 'react';
 
 export const ProductsInCart = () => {
   const productsIncart = useCartStore((state) => state.cart);
-  const updateCartQuantity = useCartStore((state) => state.updateCartQuantity);
-  const removeProductFromCart = useCartStore(
-    (state) => state.removeProductFromCart
-  );
-
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {

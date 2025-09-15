@@ -15,6 +15,7 @@ interface Props {
 
 export async function generateMetadata(
   { params }: Props,
+  // eslint-disable-next-line
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const slug = (await params).slug;

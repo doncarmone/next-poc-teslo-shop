@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Title } from '../../../components/ui/title/Title';
 import { ProductsInCart } from './(checkout)/ui/ProductsInCart';
 import { PlaceOrder } from './(checkout)/ui/PlaceOrder';
