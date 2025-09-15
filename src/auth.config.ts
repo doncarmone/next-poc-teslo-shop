@@ -10,7 +10,8 @@ export const authConfig: NextAuthConfig = {
         newUser: '/auth/new-account'
     },
     callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
+        // authorized({ auth, request: { nextUrl } }) {
+        authorized() {
             return true;
         },
         jwt: async ({ token, user }) => {
@@ -20,6 +21,7 @@ export const authConfig: NextAuthConfig = {
             return token;
         },
         session: async ({ session, token }) => {
+            // eslint-disable-next-line
             session.user = token.data as any;
             return session;
         }
@@ -49,6 +51,7 @@ export const authConfig: NextAuthConfig = {
                 if (!bcryptjs.compareSync(password, user.password)) return null;
 
                 //regresar el usuario sin la contraseña
+                // eslint-disable-next-line
                 const { password: _, ...rest } = user;
 
                 return rest;

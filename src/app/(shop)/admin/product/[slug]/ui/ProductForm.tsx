@@ -5,7 +5,7 @@ import {
   Product,
   ProductImage as ProductWithImage,
 } from '@/interfaces';
-import Image from 'next/image';
+
 import { useForm } from 'react-hook-form';
 import { clsx } from 'clsx';
 import { createOrUpdateProduct, deleteProductImage } from '@/actions';
@@ -38,7 +38,7 @@ export const ProductForm = ({ product, categories }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    // formState: { isValid },
     getValues,
     setValue,
     watch,
@@ -55,7 +55,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
   const onSizeChanged = (size: string) => {
     const sizes = new Set(getValues('sizes'));
-
+    // eslint-disable-next-line
     sizes.has(size) ? sizes.delete(size) : sizes.add(size);
 
     setValue('sizes', Array.from(sizes), { shouldValidate: true });
@@ -200,6 +200,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                   'flex  items-center justify-center w-10 h-10 mr-2 border rounded-md p-2 cursor pointer',
                   {
                     'bg-blue-600 text-white': getValues('sizes')?.includes(
+                      // eslint-disable-next-line
                       size as any
                     ),
                   }

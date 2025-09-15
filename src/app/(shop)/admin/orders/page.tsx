@@ -1,4 +1,4 @@
-import { getOrderByUser, getPaginatedOrders } from '@/actions';
+import { getPaginatedOrders } from '@/actions';
 import { Title } from '@/components';
 
 import Link from 'next/link';

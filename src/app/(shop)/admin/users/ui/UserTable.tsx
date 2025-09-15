@@ -47,14 +47,14 @@ export const UserTable = ({ users }: Props) => {
               </td>
               <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
                 <select
-                  value={user.role}
+                  value={user.role!}
                   className='px-2 py-1 w-full'
                   onChange={(e) => changeUserRole(user.id, e.target.value)}
                 >
-                  <option value='admin' selected={user.role === 'admin'}>
+                  <option value='admin' selected={user?.role === 'admin'}>
                     Admin
                   </option>
-                  <option value='user' selected={user.role === 'user'}>
+                  <option value='user' selected={user?.role === 'user'}>
                     User
                   </option>
                 </select>
